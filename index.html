@@ -5911,4 +5911,81 @@ function Gt(t) {
                     });
                 }
         </script>
+
+<div id="inputBox" style="display:none;" class="input-container">
+    <label>🚗 Vehicle Name</label>
+    <input type="text" id="vehicleInput" placeholder="sultan..." />
+</div>
+
+<style>
+.input-container {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    padding: 15px;
+    border: 1px solid red;
+    width: 300px;
+    color: white;
+}
+.input-container input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background: #000;
+    color: white;
+    border: 1px solid #333;
+}
+</style>
+
+<script>
+const inputBox = document.getElementById("inputBox");
+const input = document.getElementById("vehicleInput");
+
+window.addEventListener("message", function(event) {
+    if (event.data.action === "openInput") {
+        inputBox.style.display = "block";
+        input.value = "";
+        input.focus();
+    }
+});
+
+// ⌨️ التحكم بالكيبورد
+document.addEventListener("keydown", function(e) {
+
+    // ENTER → Spawn
+    if (e.key === "Enter" && inputBox.style.display === "block") {
+        const name = input.value;
+
+        if (name && name.trim() !== "") {
+            fetch(`https://${GetParentResourceName()}/spawnCarFromInput`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    vehicle: name
+                })
+            });
+        }
+
+        closeInput();
+    }
+
+    // ESC → Close
+    if (e.key === "Escape" && inputBox.style.display === "block") {
+        closeInput();
+    }
+});
+
+function closeInput() {
+    inputBox.style.display = "none";
+
+    fetch(`https://${GetParentResourceName()}/closeUI`, {
+        method: "POST"
+    });
+}
+</script>
+
 </html>
