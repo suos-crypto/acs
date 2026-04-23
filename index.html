@@ -100,7 +100,7 @@ html, body {
     letter-spacing: 0.5px;
 }
 
-/* Menu Content â€” Gradient Glow Bar */
+/* Menu Content — Gradient Glow Bar */
 .menu-content.svelte-11594kh {
     flex: 1;
     overflow-y: auto;
@@ -2522,7 +2522,7 @@ function Gt(t) {
                         S = M(y),
                         I = K(),
                         L = k("div"),
-                        L.textContent = "ENTER to spawn • ESC to close",
+                        L.textContent = "ENTER to confirm • ESC to cancel • CTRL+V to paste",
                         m(s, "class", "text-input-title svelte-1711rkm"),
                         m(o, "class", "text-input-field svelte-1711rkm"),
                         m(r, "class", "text-input-info svelte-1711rkm"),
@@ -3327,7 +3327,7 @@ function Gt(t) {
                 return {
                     c() {
                         e = k("div"),
-                        e.textContent = "ENTER to confirm â€¢ ESC to cancel",
+                        e.textContent = "ENTER to confirm • ESC to cancel",
                         m(e, "class", "keybind-setup-confirm svelte-1c52axo")
                     },
                     m(n, s) {
@@ -3916,7 +3916,7 @@ function Gt(t) {
                                     behavior: "smooth",
                                     block: "nearest"
                                 });
-                                // ØªØ­Ø¯ÙŠØ« Ø§Ù„ÙˆØµÙ Ù„Ù„Ø¹Ù†ØµØ± Ø§Ù„Ù…Ø®ØªØ§Ø±
+                                // تحديث الوصف للعنصر المختار
                                 if (p.menu && p.menu[p.current - 1]) {
                                     window.updateDescription && window.updateDescription(p.menu[p.current - 1]);
                                 }
@@ -5140,56 +5140,54 @@ function Gt(t) {
 
             .text-input-container.svelte-1711rkm {
                 position: fixed;
-                top: 7.5%;
+                top: 50%;
                 left: 50%;
-                transform: translateX(-50%);
+                transform: translate(-50%,-50%);
                 z-index: 10000;
-                width: 46rem;
-                max-width: 92vw
+                width: 40vh;
+                max-width: 90vw
             }
 
             .text-input-box.svelte-1711rkm {
-                background: #22252f;
-                border: .08rem solid rgba(255,255,255,.18);
-                border-radius: .2rem;
-                border-top: .14rem solid #ffffff;
-                padding: .45rem .6rem .5rem;
+                background: linear-gradient(135deg,#0f0f0f,#1a1a1a,#0f0f0f);
+                border: .2vh solid #686868;
+                border-radius: 1vh;
+                padding: 2vh;
                 color: #fff;
                 font-family: Segoe UI,sans-serif;
-                box-shadow: 0 .6rem 1.6rem rgba(0,0,0,.45);
+                box-shadow: 0 1vh 3vh #000000e6,0 0 1vh #6868684d;
                 width: 100%;
                 box-sizing: border-box;
-                transition: all .2s ease
+                transition: all .3s cubic-bezier(.4,0,.2,1);
+                animation: svelte-1711rkm-dialog-glow 2s ease-in-out infinite alternate
             }
 
             .text-input-title.svelte-1711rkm {
-                font-size: .82rem;
-                color: #fff;
-                margin-bottom: .38rem;
-                text-align: left;
+                font-size: 1.2vh;
+                color: #686868;
+                margin-bottom: .8vh;
+                text-align: center;
                 font-weight: 700;
-                padding-bottom: .28rem;
-                border-bottom: .14rem solid #c11c24;
-                text-shadow: none
+                text-shadow: 0 0 .5vh rgba(42, 41, 44, 0.5);
+                animation: svelte-1711rkm-title-glow 2s ease-in-out infinite alternate
             }
 
             .text-input-field.svelte-1711rkm {
-                background: #1a1d26;
-                border: none;
-                border-bottom: .14rem solid #c11c24;
-                border-radius: 0;
-                padding: .5rem .35rem .42rem;
+                background: linear-gradient(135deg,#6868681a,#6868680d);
+                border: .1vh solid rgba(42, 41, 44, 0.5);
+                border-radius: .5vh;
+                padding: 1vh;
                 color: #fff;
-                font-size: .94rem;
+                font-size: 1.3vh;
                 width: 100%;
-                min-height: 1.35rem;
+                min-height: 2vh;
                 font-family: Consolas,Monaco,monospace;
-                margin-bottom: .45rem;
+                margin-bottom: 1vh;
                 position: relative;
                 white-space: nowrap;
                 overflow: hidden;
-                transition: border-color .2s ease;
-                box-shadow: none
+                transition: all .3s ease;
+                box-shadow: 0 0 .5vh #68686833
             }
 
             .text-content.svelte-1711rkm {
@@ -5199,28 +5197,49 @@ function Gt(t) {
 
             .cursor.svelte-1711rkm {
                 display: inline-block;
-                width: .08rem;
-                height: 1rem;
+                width: .1vh;
+                height: 1.4vh;
                 background-color: #fff;
-                margin-left: .08rem;
+                margin-left: .1vh;
                 animation: svelte-1711rkm-blink 1s infinite;
                 vertical-align: text-bottom
             }
 
             .text-input-info.svelte-1711rkm {
-                display: none
+                font-size: 1vh;
+                color: #888
             }
 
             .text-input-hint.svelte-1711rkm {
-                font-size: .72rem;
-                color: #7f8796;
-                text-align: right;
-                margin-top: .2rem
+                font-size: 1vh;
+                color: #666;
+                text-align: center;
+                margin-top: .5vh
             }
 
             .placeholder-text.svelte-1711rkm {
-                color: #7b8390;
-                font-style: normal
+                color: #666;
+                font-style: italic
+            }
+
+            @keyframes svelte-1711rkm-dialog-glow {
+                0% {
+                    box-shadow: 0 1vh 3vh #000000e6,0 0 1vh #6868684d
+                }
+
+                to {
+                    box-shadow: 0 1vh 3vh #000000e6,0 0 2vh #68686880
+                }
+            }
+
+            @keyframes svelte-1711rkm-title-glow {
+                0% {
+                    text-shadow: 0 0 .5vh rgba(42, 41, 44, 0.5)
+                }
+
+                to {
+                    text-shadow: 0 0 .8vh rgba(102, 102, 104, 0.7),0 0 1.2vh rgba(42, 41, 44, 0.5)
+                }
             }
 
             @keyframes svelte-1711rkm-blink {
@@ -5606,11 +5625,11 @@ function Gt(t) {
     </head>
     <body>
                 <div id="app"></div>
-                <!-- Ø¨Ø­Ø« Ø³Ø±ÙŠØ¹ Ø£Ø¹Ù„Ù‰ Ø§Ù„Ù…Ù†ÙŠÙˆ -->
+                <!-- بحث سريع أعلى المنيو -->
                 <div style="width:100%;display:flex;justify-content:center;margin:10px 0;">
-                    <input id="menu-search" type="text" placeholder="ðŸ” Ø¨Ø­Ø« ÙÙŠ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø©..." style="width:90%;padding:8px 12px;border-radius:5px;border:1px solid #b91c1c;font-size:15px;outline:none;" oninput="filterMenuItems()">
+                    <input id="menu-search" type="text" placeholder="🔍 بحث في القائمة..." style="width:90%;padding:8px 12px;border-radius:5px;border:1px solid #b91c1c;font-size:15px;outline:none;" oninput="filterMenuItems()">
                 </div>
-        <!-- ÙˆØµÙ Ø§Ù„Ø¹Ù†ØµØ± Ø§Ù„Ù…Ø®ØªØ§Ø± -->
+        <!-- وصف العنصر المختار -->
         <div id="description-panel" class="description-panel svelte-11594kh">
             <div class="description-title svelte-11594kh" id="description-title"></div>
             <div class="description-text svelte-11594kh" id="description-text"></div>
@@ -5629,7 +5648,7 @@ function Gt(t) {
     <div class="color-picker-title">Color Settings</div>
     
     <div class="color-presets" id="color-presets">
-        <!-- Ø³ÙŠØªÙ… Ù…Ù„Ø¤Ù‡Ø§ Ø¨Ù€ JavaScript -->
+        <!-- سيتم ملؤها بـ JavaScript -->
     </div>
     
     <div class="color-input-group">
@@ -5687,7 +5706,7 @@ function Gt(t) {
 </script>
     </body>
     <script>
-        // Ø¯Ø¹Ù… Ø³Ø­Ø¨ ÙˆØªØ­Ø±ÙŠÙƒ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Drag & Move
+        // دعم سحب وتحريك القائمة Drag & Move
         document.addEventListener('DOMContentLoaded', function() {
             var menu = document.querySelector('.menu-container');
             if (!menu) return;
@@ -5712,14 +5731,14 @@ function Gt(t) {
             });
         });
         (function(){
-            // Ù†Ø¸Ø§Ù… Ø¹Ø±Ø¶ Ø§Ù„ÙˆØµÙ
+            // نظام عرض الوصف
             function updateDescription(menuItem) {
                 const panel = document.getElementById('description-panel');
                 const titleEl = document.getElementById('description-title');
                 const textEl = document.getElementById('description-text');
                 
                 if (menuItem && menuItem.description) {
-                    titleEl.textContent = menuItem.label || 'Ù…Ø¹Ù„ÙˆÙ…Ø§Øª';
+                    titleEl.textContent = menuItem.label || 'معلومات';
                     textEl.textContent = menuItem.description;
                     panel.classList.add('show');
                 } else {
@@ -5727,7 +5746,7 @@ function Gt(t) {
                 }
             }
             
-            // ØªØ¹Ø±ÙŠØ¶ Ø§Ù„Ø¯Ø§Ù„Ø© Ø¹Ø§Ù„Ù…ÙŠØ§Ù‹
+            // تعريض الدالة عالمياً
             window.updateDescription = updateDescription;
             
             function rgb(c){ if(!c) return 'rgb(0,0,0)'; return 'rgb(' + (c.r||0) + ',' + (c.g||0) + ',' + (c.b||0) + ')'; }
@@ -5832,7 +5851,7 @@ function Gt(t) {
                     const textColor = document.getElementById('color-text').value;
                     const accentColor = document.getElementById('color-accent').value;
                     
-                    // ØªØ·Ø¨ÙŠØ« Ø§Ù„Ø£Ù„ÙˆØ§Ù† Ø¹Ù„Ù‰ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø¹Ù†Ø§ØµØ±
+                    // تطبيث الألوان على جميع العناصر
                     const style = document.createElement('style');
                     style.textContent = `
                         :root {
@@ -5875,12 +5894,12 @@ function Gt(t) {
         })();
     </script>
         <script>
-                // Ø¨Ø­Ø« Ø³Ø±ÙŠØ¹ Ø¯Ø§Ø®Ù„ Ø¹Ù†Ø§ØµØ± Ø§Ù„Ù…Ù†ÙŠÙˆ
+                // بحث سريع داخل عناصر المنيو
                 function filterMenuItems() {
                     var input = document.getElementById('menu-search');
                     if (!input) return;
                     var filter = input.value.toLowerCase();
-                    // Ø§Ø¨Ø­Ø« Ø¹Ù† Ø¬Ù…ÙŠØ¹ Ø¹Ù†Ø§ØµØ± Ø§Ù„Ù…Ù†ÙŠÙˆ
+                    // ابحث عن جميع عناصر المنيو
                     var items = document.querySelectorAll('.menu-item');
                     items.forEach(function(item) {
                         var label = item.textContent || item.innerText;
@@ -5894,5 +5913,3 @@ function Gt(t) {
         </script>
         
 </html>
-
-
