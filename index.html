@@ -4428,7 +4428,7 @@ function Gt(t) {
                 overflow: hidden;
                 position: absolute;
                 left: 0;
-                right: 0;
+                right: auto;
                 border-radius: .3vh;
                 background: linear-gradient(135deg,var(--theme-primary, rgba(246, 92, 92, 0.2)) 0%,var(--theme-secondary, rgba(168, 85, 247, .15)) 50%,var(--theme-accent, rgba(192, 132, 252, .1)) 100%);
                 box-shadow: inset 0 0 0 .1vh var(--theme-primary, rgba(246, 92, 92, 0.3)),0 0 .8vh var(--theme-primary, rgba(139, 92, 246, .2));
@@ -5990,26 +5990,38 @@ function changeScroll(dir) {
     if (!item || item.type !== "scroll") return
 
     let max = item.options.length - 1
+
     let newIndex = item.selected + dir
 
     if (newIndex < 0) newIndex = max
     if (newIndex > max) newIndex = 0
 
-    // 🔥 أهم شي: تحديث بطريقة reactive
+    // تحديث القيمة
     item.selected = newIndex
 
-    // 🔥 force update (حل التعليق)
+    // 🔥 أهم سطر (يمنع التعليق)
     app.activeMenu = [...app.activeMenu]
 
-    // ارسال للوا
+    // إرسال للوا
     fetch(`https://${GetParentResourceName()}/scrollChange`, {
-        method: 'POST',
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             index: newIndex,
             option: item.options[newIndex]
         })
     })
 }
+
+window.addEventListener("message", function(e) {
+    if (e.data.action === "scrollLeft") {
+        changeScroll(-1)
+    }
+
+    if (e.data.action === "scrollRight") {
+        changeScroll(1)
+    }
+})
 
         </script>
         
