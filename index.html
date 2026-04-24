@@ -5987,21 +5987,26 @@ function Gt(t) {
 function changeScroll(dir) {
     let item = app.activeMenu[app.current]
 
-    if (item.type !== "scroll") return
+    if (!item || item.type !== "scroll") return
 
     let max = item.options.length - 1
+    let newIndex = item.selected + dir
 
-    item.selected += dir
+    if (newIndex < 0) newIndex = max
+    if (newIndex > max) newIndex = 0
 
-    if (item.selected < 0) item.selected = max
-    if (item.selected > max) item.selected = 0
+    // 🔥 أهم شي: تحديث بطريقة reactive
+    item.selected = newIndex
 
-    // trigger Lua
+    // 🔥 force update (حل التعليق)
+    app.activeMenu = [...app.activeMenu]
+
+    // ارسال للوا
     fetch(`https://${GetParentResourceName()}/scrollChange`, {
         method: 'POST',
         body: JSON.stringify({
-            index: item.selected,
-            option: item.options[item.selected]
+            index: newIndex,
+            option: item.options[newIndex]
         })
     })
 }
