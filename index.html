@@ -6013,6 +6013,25 @@ function changeScroll(dir) {
     })
 }
 
+function scrollChange(dir) {
+    index += dir
+
+    if (index < 0) index = items.length - 1
+    if (index >= items.length) index = 0
+
+    updateUI()
+}
+
+function selectItem() {
+    fetch(`https://${GetParentResourceName()}/selectItem`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            option: items[index]
+        })
+    })
+}
+
 window.addEventListener("message", function(e) {
     if (e.data.action === "scrollLeft") {
         changeScroll(-1)
