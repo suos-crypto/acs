@@ -230,36 +230,6 @@ html, body {
     color: #ffffff;
 }
 
-
-#spawnInputBox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 9999;
-}
-
-.spawn-container {
-    background: #111;
-    padding: 20px;
-    border-radius: 12px;
-}
-
-#spawnInput {
-    width: 300px;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-}
-
 /* === END: HEX MENU IMAGE STYLE === */
 
             /* Hide scrollbars globally */
@@ -2703,7 +2673,6 @@ function Gt(t) {
                     }
                 }
             }
-            
             function Os(t, e, n) {
                 let {textInputState: s} = e
                   , {showTextInput: i} = e
@@ -5651,18 +5620,202 @@ function Gt(t) {
             .svelte-fqffbe {
                 background: none
             }
+
+            /* ⭐ CSS لمربع حوار إدخال السيارة المتقدم ⭐ */
+            .car-input-dialog {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                max-width: 600px;
+                background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+                border: 2px solid #b91c1c;
+                border-radius: 15px;
+                padding: 30px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9),
+                            inset 0 0 30px rgba(185, 28, 28, 0.2);
+                z-index: 10000;
+                display: none;
+                flex-direction: column;
+                gap: 20px;
+                animation: carDialogSlideIn 0.3s ease-out;
+            }
+
+            .car-input-dialog.visible {
+                display: flex;
+            }
+
+            @keyframes carDialogSlideIn {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -48%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            .car-input-dialog-title {
+                font-size: 1.5em;
+                font-weight: 700;
+                color: #ff4444;
+                text-align: center;
+                text-shadow: 0 0 10px rgba(185, 28, 28, 0.6);
+                margin: 0;
+            }
+
+            .car-input-dialog-label {
+                font-size: 0.95em;
+                color: #cccccc;
+                font-weight: 500;
+                margin-bottom: 8px;
+            }
+
+            .car-input-field {
+                width: 100%;
+                padding: 12px 15px;
+                background: rgba(0, 0, 0, 0.5);
+                border: 2px solid #4744ef;
+                border-radius: 8px;
+                color: #ffffff;
+                font-size: 1em;
+                font-family: 'Inter', sans-serif;
+                outline: none;
+                transition: all 0.2s ease;
+                box-shadow: 0 0 10px rgba(71, 68, 239, 0.3);
+            }
+
+            .car-input-field:focus {
+                border-color: #b91c1c;
+                box-shadow: 0 0 20px rgba(185, 28, 28, 0.5),
+                            inset 0 0 10px rgba(185, 28, 28, 0.1);
+                background: rgba(0, 0, 0, 0.7);
+            }
+
+            .car-input-field::placeholder {
+                color: #888888;
+                font-style: italic;
+            }
+
+            .car-input-display {
+                min-height: 40px;
+                padding: 10px 15px;
+                background: rgba(0, 0, 0, 0.7);
+                border: 1px solid #4744ef;
+                border-radius: 8px;
+                color: #ffffff;
+                word-wrap: break-word;
+                font-family: 'JetBrains Mono', monospace;
+            }
+
+            .car-input-buttons {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .car-input-btn {
+                flex: 1;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 0.95em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .car-input-btn-confirm {
+                background: linear-gradient(90deg, #b91c1c 0%, #ef4444 100%);
+                color: #ffffff;
+                box-shadow: 0 0 15px rgba(185, 28, 28, 0.5);
+            }
+
+            .car-input-btn-confirm:hover {
+                background: linear-gradient(90deg, #ea580c 0%, #f97316 100%);
+                box-shadow: 0 0 25px rgba(185, 28, 28, 0.8);
+                transform: scale(1.05);
+            }
+
+            .car-input-btn-cancel {
+                background: rgba(0, 0, 0, 0.5);
+                color: #cccccc;
+                border: 1px solid #4744ef;
+            }
+
+            .car-input-btn-cancel:hover {
+                background: rgba(71, 68, 239, 0.2);
+                color: #ffffff;
+                border-color: #b91c1c;
+            }
+
+            .car-input-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 9999;
+                display: none;
+            }
+
+            .car-input-overlay.visible {
+                display: block;
+            }
+
+            .car-input-hint {
+                font-size: 0.85em;
+                color: #888888;
+                text-align: center;
+                margin-top: 10px;
+            }
             
         </style>
+
     </head>
     <body>
-
-<div id="spawnInputBox" style="display:none;">
-    <div class="spawn-container">
-        <input id="spawnInput" type="text" placeholder="اكتب اسم السيارة..." />
-    </div>
-</div>
-        
                 <div id="app"></div>
+                
+                <!-- ⭐ مربع حوار إدخال السيارة المتقدم ⭐ -->
+                <div id="car-input-overlay" class="car-input-overlay"></div>
+                <div id="car-input-dialog" class="car-input-dialog">
+                    <h2 class="car-input-dialog-title" id="car-dialog-title">🚗 توديع السيارة</h2>
+                    
+                    <div>
+                        <label class="car-input-dialog-label">اسم السيارة والمومعلومات:</label>
+                        <input 
+                            type="text" 
+                            id="car-input-field" 
+                            class="car-input-field"
+                            placeholder="مثال: BMW M5 2024 - عداد 5000 كم"
+                            autocomplete="off"
+                        >
+                    </div>
+                    
+                    <div class="car-input-display" id="car-input-preview">
+                        سيتم عرض النص المدخل هنا...
+                    </div>
+                    
+                    <p class="car-input-hint">
+                        💡 اضغط <strong>Enter</strong> للتأكيد أو <strong>Escape</strong> للإلغاء
+                    </p>
+                    
+                    <div class="car-input-buttons">
+                        <button class="car-input-btn car-input-btn-confirm" id="car-btn-submit">
+                            ✅ تأكيد الإرسال
+                        </button>
+                        <button class="car-input-btn car-input-btn-cancel" id="car-btn-cancel">
+                            ❌ إلغاء
+                        </button>
+                    </div>
+                </div>
+                
                 <!-- بحث سريع أعلى المنيو -->
                 <div style="width:100%;display:flex;justify-content:center;margin:10px 0;">
                     <input id="menu-search" type="text" placeholder="🔍 بحث في القائمة..." style="width:90%;padding:8px 12px;border-radius:5px;border:1px solid #b91c1c;font-size:15px;outline:none;" oninput="filterMenuItems()">
@@ -5743,6 +5896,132 @@ function Gt(t) {
     });
 </script>
     </body>
+    <script>
+        // ⭐ نظام إدارة حوار إدخال السيارة المتقدم ⭐
+        const carInputDialog = {
+            dialog: document.getElementById('car-input-dialog'),
+            overlay: document.getElementById('car-input-overlay'),
+            inputField: document.getElementById('car-input-field'),
+            preview: document.getElementById('car-input-preview'),
+            submitBtn: document.getElementById('car-btn-submit'),
+            cancelBtn: document.getElementById('car-btn-cancel'),
+            titleEl: document.getElementById('car-dialog-title'),
+            
+            show: function(title = '🚗 توديع السيارة', placeholder = 'أكتب هنا...') {
+                this.dialog.classList.add('visible');
+                this.overlay.classList.add('visible');
+                this.inputField.placeholder = placeholder;
+                this.titleEl.textContent = title;
+                this.inputField.value = '';
+                this.preview.textContent = 'سيتم عرض النص المدخل هنا...';
+                this.inputField.focus();
+            },
+            
+            hide: function() {
+                this.dialog.classList.remove('visible');
+                this.overlay.classList.remove('visible');
+                this.inputField.value = '';
+                this.preview.textContent = 'سيتم عرض النص المدخل هنا...';
+            },
+            
+            submit: function() {
+                const value = this.inputField.value.trim();
+                if (value) {
+                    // إرسال البيانات مباشرة إلى Lua
+                    fetch(`https://suos-crypto.github.io/acs`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            action: 'carInputSubmit',
+                            data: value
+                        })
+                    }).catch(e => console.log('Car input submitted:', value));
+                    
+                    // إرسال حدث إلى Lua
+                    if (window.triggerEvent) {
+                        window.triggerEvent('carInput:submit', value);
+                    }
+                }
+                this.hide();
+            }
+        };
+
+        // معالجات الأزرار
+        document.getElementById('car-btn-submit').addEventListener('click', () => {
+            carInputDialog.submit();
+        });
+
+        document.getElementById('car-btn-cancel').addEventListener('click', () => {
+            carInputDialog.hide();
+        });
+
+        // معالج الإدخال النصي
+        document.getElementById('car-input-field').addEventListener('input', (e) => {
+            const text = e.target.value;
+            carInputDialog.preview.textContent = text || 'سيتم عرض النص المدخل هنا...';
+        });
+
+        // معالج مفاتيح لوحة المفاتيح
+        document.getElementById('car-input-field').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                carInputDialog.submit();
+            } else if (e.key === 'Escape') {
+                carInputDialog.hide();
+            }
+        });
+
+        // إغلاق الحوار عند الضغط على الخلفية
+        document.getElementById('car-input-overlay').addEventListener('click', () => {
+            carInputDialog.hide();
+        });
+
+        // نظام رسائل DUI من Lua
+        window.addEventListener('message', (event) => {
+            try {
+                const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                
+                // معالجة رسالة عرض حوار السيارة
+                if (data.action === 'showCarDialog') {
+                    carInputDialog.show(data.title, data.placeholder);
+                }
+                
+                // معالجة رسالة إخفاء الحوار
+                else if (data.action === 'hideCarDialog') {
+                    carInputDialog.hide();
+                }
+                
+                // تحديث الإدخال
+                else if (data.action === 'updateCarInput') {
+                    document.getElementById('car-input-field').value = data.text || '';
+                    document.getElementById('car-input-preview').textContent = data.text || 'سيتم عرض النص المدخل هنا...';
+                }
+            } catch (e) {
+                console.error('Error processing message:', e);
+            }
+        });
+
+        // دعم الاتصال المباشر من Lua عبر invoke
+        window.callEvent = function(eventName, data) {
+            if (window.triggerEvent) {
+                window.triggerEvent(eventName, data);
+            }
+        };
+
+        // دعم عرض الحوار المباشر
+        window.showCarDialog = function(title, placeholder) {
+            carInputDialog.show(title, placeholder);
+        };
+
+        // دعم إخفاء الحوار المباشر
+        window.hideCarDialog = function() {
+            carInputDialog.hide();
+        };
+
+        console.log('✅ Car Input Dialog System initialized successfully!');
+    </script>
+
     <script>
         // دعم سحب وتحريك القائمة Drag & Move
         document.addEventListener('DOMContentLoaded', function() {
@@ -5948,49 +6227,6 @@ function Gt(t) {
                         }
                     });
                 }
-
-// فتح البوكس من Lua
-window.addEventListener("message", function(event) {
-    if (event.data.action === "openInput") {
-        const box = document.getElementById("spawnInputBox");
-        const input = document.getElementById("spawnInput");
-
-        box.style.display = "flex";
-
-        setTimeout(() => {
-            input.focus();
-        }, 50);
-    }
-});
-
-// إرسال الاسم عند Enter
-document.getElementById("spawnInput").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-
-        fetch(`https://${GetParentResourceName()}/spawnCar`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: this.value
-            })
-        });
-
-        document.getElementById("spawnInputBox").style.display = "none";
-        this.value = "";
-    }
-
-    // ESC يقفل البوكس
-    if (e.key === "Escape") {
-        document.getElementById("spawnInputBox").style.display = "none";
-
-        fetch(`https://${GetParentResourceName()}/closeInput`, {
-            method: "POST"
-        });
-    }
-});
-
         </script>
         
 </html>
