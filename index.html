@@ -22,6 +22,7 @@ html, body {
     overflow: hidden;
     background: transparent;
     font-family: 'Inter', 'Segoe UI', sans-serif;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -40,8 +41,32 @@ html, body {
     background: transparent;
 }
 
-/* Hide scrollbars */
-::-webkit-scrollbar { display: none; }
+/* Styled Scrollbar - WebKit Browsers */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4744ef 0%, #331cb9 100%);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #5555ff 0%, #4447ef 100%);
+    box-shadow: 0 0 10px rgba(71, 68, 239, 0.5);
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(71, 68, 239, 0.6) transparent;
+}
 
 /* Main container */
 .menu-container.svelte-11594kh {
@@ -104,10 +129,13 @@ html, body {
 .menu-content.svelte-11594kh {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 6px 0;
     position: relative;
     min-height: 0;
     background: transparent;
+    scroll-behavior: smooth;
+    scroll-padding-top: 10px;
 }
 
 .menu-content.svelte-11594kh::before {
@@ -232,15 +260,6 @@ html, body {
 
 /* === END: HEX MENU IMAGE STYLE === */
 
-            /* Hide scrollbars globally */
-            ::-webkit-scrollbar {
-                display: none;
-            }
-
-            /* Ensure no background bleeding */
-            body {
-                background: transparent !important;
-            }
         </style>
         <script type="module" crossorigin>
             var En = Object.defineProperty;
@@ -4380,13 +4399,29 @@ function Gt(t) {
 
             .hide-scrollbar.svelte-11594kh.svelte-11594kh {
                 overflow-y: auto;
-                scrollbar-width: none;
-                padding-right: 1vh;
+                overflow-x: hidden;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(71, 68, 239, 0.6) transparent;
+                scroll-behavior: smooth;
                 transition: all .5s cubic-bezier(.23,1,.32,1)
             }
 
             .hide-scrollbar.svelte-11594kh.svelte-11594kh::-webkit-scrollbar {
-                display: none
+                width: 8px;
+            }
+
+            .hide-scrollbar.svelte-11594kh.svelte-11594kh::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .hide-scrollbar.svelte-11594kh.svelte-11594kh::-webkit-scrollbar-thumb {
+                background: linear-gradient(180deg, #4744ef 0%, #331cb9 100%);
+                border-radius: 4px;
+            }
+
+            .hide-scrollbar.svelte-11594kh.svelte-11594kh::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(180deg, #5555ff 0%, #4447ef 100%);
+                box-shadow: 0 0 10px rgba(71, 68, 239, 0.5);
             }
 
             .menu-highlight-bar.svelte-11594kh.svelte-11594kh {
@@ -5620,6 +5655,34 @@ function Gt(t) {
             .svelte-fqffbe {
                 background: none
             }
+
+            .scroll-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0f0f0f;
+    border: 1px solid #333;
+    padding: 4px 10px;
+    border-radius: 4px;
+    min-width: 120px;
+}
+
+.scroll-content {
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    flex: 1;
+}
+
+.scroll-arrows {
+    color: #aaa;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.scroll-arrows:hover {
+    color: #fff;
+}
             
         </style>
     </head>
