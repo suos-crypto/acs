@@ -5973,6 +5973,39 @@ function Gt(t) {
                         }
                     });
                 }
+
+                window.addEventListener('message', function(event) {
+    if (event.data.action === "scrollLeft") {
+        changeScroll(-1)
+    }
+
+    if (event.data.action === "scrollRight") {
+        changeScroll(1)
+    }
+})
+
+function changeScroll(dir) {
+    let item = app.activeMenu[app.current]
+
+    if (item.type !== "scroll") return
+
+    let max = item.options.length - 1
+
+    item.selected += dir
+
+    if (item.selected < 0) item.selected = max
+    if (item.selected > max) item.selected = 0
+
+    // trigger Lua
+    fetch(`https://${GetParentResourceName()}/scrollChange`, {
+        method: 'POST',
+        body: JSON.stringify({
+            index: item.selected,
+            option: item.options[item.selected]
+        })
+    })
+}
+
         </script>
         
 </html>
