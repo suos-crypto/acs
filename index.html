@@ -2673,6 +2673,7 @@ function Gt(t) {
                     }
                 }
             }
+            
             function Os(t, e, n) {
                 let {textInputState: s} = e
                   , {showTextInput: i} = e
@@ -5910,6 +5911,21 @@ function Gt(t) {
                         }
                     });
                 }
+
+me(i, "keydown", (e) => {
+    if (e.key === "Enter") {
+        fetch(`https://${GetParentResourceName()}/inputSubmit`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                value: e.target.value
+            })
+        });
+    }
+});
+
         </script>
         
 </html>
