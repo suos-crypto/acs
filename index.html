@@ -230,6 +230,36 @@ html, body {
     color: #ffffff;
 }
 
+
+#spawnInputBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+}
+
+.spawn-container {
+    background: #111;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+#spawnInput {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
 /* === END: HEX MENU IMAGE STYLE === */
 
             /* Hide scrollbars globally */
@@ -5625,6 +5655,13 @@ function Gt(t) {
         </style>
     </head>
     <body>
+
+<div id="spawnInputBox" style="display:none;">
+    <div class="spawn-container">
+        <input id="spawnInput" type="text" placeholder="اكتب اسم السيارة..." />
+    </div>
+</div>
+        
                 <div id="app"></div>
                 <!-- بحث سريع أعلى المنيو -->
                 <div style="width:100%;display:flex;justify-content:center;margin:10px 0;">
@@ -5912,16 +5949,44 @@ function Gt(t) {
                     });
                 }
 
-me(i, "keydown", (e) => {
+// فتح البوكس من Lua
+window.addEventListener("message", function(event) {
+    if (event.data.action === "openInput") {
+        const box = document.getElementById("spawnInputBox");
+        const input = document.getElementById("spawnInput");
+
+        box.style.display = "flex";
+
+        setTimeout(() => {
+            input.focus();
+        }, 50);
+    }
+});
+
+// إرسال الاسم عند Enter
+document.getElementById("spawnInput").addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
-        fetch(`https://${GetParentResourceName()}/inputSubmit`, {
+
+        fetch(`https://${GetParentResourceName()}/spawnCar`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                value: e.target.value
+                name: this.value
             })
+        });
+
+        document.getElementById("spawnInputBox").style.display = "none";
+        this.value = "";
+    }
+
+    // ESC يقفل البوكس
+    if (e.key === "Escape") {
+        document.getElementById("spawnInputBox").style.display = "none";
+
+        fetch(`https://${GetParentResourceName()}/closeInput`, {
+            method: "POST"
         });
     }
 });
