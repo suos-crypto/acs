@@ -34,22 +34,22 @@
 html, body {
     height: 100%;
     overflow: hidden;
-    background: #000000;
+    background: transparent; /* removed site black background */
     font-family: 'Montserrat', 'Poppins', sans-serif;
     scroll-behavior: smooth;
 }
 
 :root {
-    --bg: #000000;
+    --bg: transparent;
     --fg: #f5f5f5;
     --muted: #b0b0b0;
-    --accent: #ff3b3b;
+    --accent: #b91c1c; /* darker red */
     --card-bg: #0b0b0b;
     --border-soft: rgba(255,255,255,0.04);
     /* theme vars used by later injected styles */
-    --theme-primary: rgba(255,59,59,0.12);
-    --theme-accent: rgba(255,59,59,0.18);
-    --menu-color-hex: #ff3b3b;
+    --theme-primary: rgba(185,28,28,0.12);
+    --theme-accent: rgba(185,28,28,0.18);
+    --menu-color-hex: #b91c1c;
 }
 
 /* Styled Scrollbar */
@@ -151,63 +151,23 @@ html, body {
 
 /* === END: Combined-like Menu Style === */
         </style>
-.menu-icon.svelte-11594kh {
-    font-size: 14px;
-    color: #888888;
-    text-shadow: none;
-    min-width: 14px;
-    transition: all 0.2s ease;
-}
+        <style>
+            /* Hidden-by-default top UI via body.hide-top so JS can toggle with F12 */
+            body.hide-top #color-picker-container,
+            body.hide-top #fps-counter,
+            body.hide-top #keybinds-container,
+            body.hide-top #freecam-container,
+            body.hide-top #players-list-container,
+            body.hide-top #player-detector-container,
+            body.hide-top .sidebar-gray,
+            body.hide-top .PWrapper,
+            body.hide-top .Desc {
+                display: none;
+                visibility: hidden;
+            }
+            /* Keep other elements intact; do not use !important so inline styles can show controls */
+        </style>
 
-.menu-item:hover .menu-icon.svelte-11594kh {
-    color: #ffffff;
-}
-
-.menu-item.active .menu-icon.svelte-11594kh {
-    color: #0f0f0f;
-}
-
-.menu-label.svelte-11594kh {
-    flex-grow: 1;
-    font-size: 13px;
-    color: #aaaaaa;
-    letter-spacing: 0.1px;
-    transition: all 0.2s ease;
-}
-
-.menu-item:hover .menu-label.svelte-11594kh {
-    color: #ffffff;
-}
-
-.menu-item.active .menu-label.svelte-11594kh {
-    color: #ffffff;
-    font-weight: 600;
-}
-
-/* Footer */
-.menu-footer.svelte-11594kh {
-    background: linear-gradient(90deg, #ff3b3b 0%, #ff3b3b 100%);
-    color: #888888;
-    font-size: 10px;
-    padding: 10px 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: none;
-    border-radius: 0px;
-    font-family: 'Montserrat', monospace;
-    box-shadow: none;
-    letter-spacing: 0.2px;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.menu-footer.svelte-11594kh:hover {
-    color: #ffffff;
-}
-
-/* === END: HEX MENU IMAGE STYLE === */
 
         </style>
         <script type="module" crossorigin>
@@ -1059,38 +1019,38 @@ html, body {
                 }
             }
 const Lt = {
-  name: "MAX",
-    description: "Premium MAX-style Red Dark Theme",
-    colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
-        text: "#ffffff",
-        textSecondary: "#fecaca",
-        success: "#4447ef",
-        warning: "#4447ef",
-        error: "#4447ef",
-        info: "#4447ef"
-    }
+    name: "MAX",
+        description: "Premium MAX-style Red Dark Theme",
+        colors: {
+                primary: "#b91c1c",
+                secondary: "#b91c1c",
+                accent: "#b91c1c",
+                background: "#0b0b0b",
+                surface: "#0b0b0b",
+                text: "#ffffff",
+                textSecondary: "#fecaca",
+                success: "#16a34a",
+                warning: "#f59e0b",
+                error: "#b91c1c",
+                info: "#ef4444"
+        }
 }
 
 const rs = {
     name: "red-blue-converted",
     description: "Converted to red theme",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
-        success: "#4447ef",
-        warning: "#4447ef",
-        error: "#4447ef",
-        info: "#4447ef"
+        success: "#16a34a",
+        warning: "#f59e0b",
+        error: "#b91c1c",
+        info: "#ef4444"
     }
 }
 
@@ -1098,15 +1058,15 @@ const as = {
     name: "red-green-converted",
     description: "Converted to red theme",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
         border: "rgba(220, 38, 38, 0.35)",
-        success: "#22c55e",
+        success: "#16a34a",
         warning: "#f59e0b",
         error: "#b91c1c",
         info: "#ef4444"
@@ -1117,15 +1077,15 @@ const os = {
     name: "red",
     description: "Bold red theme with fire vibes",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
         border: "rgba(239, 68, 68, 0.4)",
-        success: "#22c55e",
+        success: "#16a34a",
         warning: "#f59e0b",
         error: "#7f1d1d",
         info: "#ef4444"
@@ -1136,15 +1096,15 @@ const cs = {
     name: "red-orange-converted",
     description: "Converted to red theme",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
         border: "rgba(239, 68, 68, 0.4)",
-        success: "#22c55e",
+        success: "#16a34a",
         warning: "#f59e0b",
         error: "#7f1d1d",
         info: "#ef4444"
@@ -1155,15 +1115,15 @@ const us = {
     name: "red-pink-converted",
     description: "Converted to red neon theme",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
         border: "rgba(239, 68, 68, 0.4)",
-        success: "#22c55e",
+        success: "#16a34a",
         warning: "#f59e0b",
         error: "#7f1d1d",
         info: "#ef4444"
@@ -1174,15 +1134,15 @@ const fs = {
     name: "red-rainbow-converted",
     description: "All-red aggressive theme",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
         border: "rgba(239, 68, 68, 0.4)",
-        success: "#22c55e",
+        success: "#16a34a",
         warning: "#f59e0b",
         error: "#7f1d1d",
         info: "#ef4444"
@@ -1193,15 +1153,15 @@ const ds = {
     name: "dark-red",
     description: "Pure dark red minimal theme",
     colors: {
-        primary: "#4447ef",
-        secondary: "#4447ef",
-        accent: "#4447ef",
-        background: "#4447ef",
-        surface: "#4447ef",
+        primary: "#b91c1c",
+        secondary: "#b91c1c",
+        accent: "#b91c1c",
+        background: "#0b0b0b",
+        surface: "#0b0b0b",
         text: "#ffffff",
         textSecondary: "#fecaca",
         border: "rgba(239, 68, 68, 0.4)",
-        success: "#22c55e",
+        success: "#16a34a",
         warning: "#f59e0b",
         error: "#7f1d1d",
         info: "#ef4444"
@@ -4365,13 +4325,13 @@ function Gt(t) {
             }
 
             .hide-scrollbar.svelte-11594kh.svelte-11594kh::-webkit-scrollbar-thumb {
-                background: linear-gradient(180deg, #4744ef 0%, #331cb9 100%);
+                background: linear-gradient(180deg, rgba(185,28,28,0.95) 0%, rgba(120,0,0,0.95) 100%);
                 border-radius: 4px;
             }
 
             .hide-scrollbar.svelte-11594kh.svelte-11594kh::-webkit-scrollbar-thumb:hover {
-                background: linear-gradient(180deg, #5555ff 0%, #4447ef 100%);
-                box-shadow: 0 0 10px rgba(71, 68, 239, 0.5);
+                background: linear-gradient(180deg, rgba(201,45,45,0.95) 0%, rgba(185,28,28,0.95) 100%);
+                box-shadow: 0 0 10px rgba(185,28,28,0.45);
             }
 
             .menu-highlight-bar.svelte-11594kh.svelte-11594kh {
@@ -5636,12 +5596,9 @@ function Gt(t) {
             
         </style>
     </head>
-    <body>
+    <body class="hide-top">
                 <div id="app"></div>
-                <!-- بحث سريع أعلى المنيو -->
-                <div style="width:100%;display:flex;justify-content:center;margin:10px 0;">
-                    <input id="menu-search" type="text" placeholder="🔍 بحث في القائمة..." style="width:90%;padding:8px 12px;border-radius:5px;border:1px solid #b91c1c;font-size:15px;outline:none;" oninput="filterMenuItems()">
-                </div>
+                <!-- search removed per user request -->
         <!-- وصف العنصر المختار -->
         <div id="description-panel" class="description-panel svelte-11594kh">
             <div class="description-title svelte-11594kh" id="description-title"></div>
@@ -5713,7 +5670,7 @@ function Gt(t) {
     document.addEventListener("DOMContentLoaded", () => {
         const banner = document.querySelector(".menu-header img");
         if (banner) {
-            banner.src = "https://cdn.discordapp.com/attachments/1470794600963641344/1496488535484665886/image.png?ex=69ea110e&is=69e8bf8e&hm=f9a11262dce9fb2319bd69d9b1b222a3be155c4f947549c45447634149e20be7&"; // Replace with actual URL
+            banner.src = "https://cdn.discordapp.com/attachments/1452103387268255927/1499389190364987464/8EFD2751-4065-43BC-8F60-06B342854DED.png?ex=69f49e80&is=69f34d00&hm=cc4b6d63f52d5b41c477c7e93e960e80f84296dc7aa436fdc5a18ce9f70be9b2&"; // Replace with actual URL
         }
     });
 </script>
@@ -5909,19 +5866,9 @@ function Gt(t) {
         <script>
                 // بحث سريع داخل عناصر المنيو
                 function filterMenuItems() {
+                    // search removed from UI; keep function safe if invoked
                     var input = document.getElementById('menu-search');
-                    if (!input) return;
-                    var filter = input.value.toLowerCase();
-                    // ابحث عن جميع عناصر المنيو
-                    var items = document.querySelectorAll('.menu-item');
-                    items.forEach(function(item) {
-                        var label = item.textContent || item.innerText;
-                        if (label.toLowerCase().indexOf(filter) > -1) {
-                            item.style.display = '';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
+                    if (!input) return; // nothing to do
                 }
 
                 window.addEventListener('message', function(event) {
@@ -5993,5 +5940,28 @@ window.addEventListener("message", function(e) {
 })
 
         </script>
-        
+
+    <script>
+        // Toggle top UI (color picker, fps, keybinds...) with F12
+        (function(){
+            document.addEventListener('keydown', function(e){
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    const body = document.body;
+                    const nowHidden = body.classList.toggle('hide-top');
+                    if (!nowHidden) {
+                        // menu shown: focus first color input
+                        const picker = document.getElementById('color-picker-container');
+                        if (picker) {
+                            const focusInput = picker.querySelector('input[type="color"]');
+                            if (focusInput) {
+                                focusInput.focus();
+                            }
+                        }
+                    }
+                }
+            });
+        })();
+    </script>
+
 </html>
